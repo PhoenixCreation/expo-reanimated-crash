@@ -1,5 +1,8 @@
 {
   "expo": {
+    "experiments": {
+      "turboModules": true
+    },
     "name": "testOfstandalone",
     "slug": "testOfstandalone",
     "version": "1.0.0",
@@ -23,7 +26,8 @@
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#FFFFFF"
-      }
+      },
+      "package": "com.phoenixcreation.testOfstandalone"
     },
     "web": {
       "favicon": "./assets/favicon.png"
