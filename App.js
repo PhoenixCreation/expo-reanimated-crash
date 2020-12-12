@@ -1,6 +1,13 @@
 import { StatusBar } from 'expo-status-bar';
 import React from 'react';
 import { StyleSheet, Text, View, Animated, Button } from 'react-native';
+import * as Animatable from 'react-native-animatable';
+
+const animation = {
+  0: { opacity: 0, translateX: 50, translateY: -50},
+  1: { opacity: 1, translateX: 0, translateY: 0}
+}
+
 
 export default function App() {
   const translateY = React.useRef(new Animated.Value(0)).current;
@@ -25,6 +32,13 @@ export default function App() {
         />
       </View>
       <Animated.Text style={{ margin: 50, transform: [{translateY}]}}>Testing the standalone build after installing reanimated 2.0-release candidate - 0</Animated.Text>
+      <Animatable.View
+        animation={animation}
+        duration={2000}
+        delay={1000}
+        style={{ width: 100, height: 100, backgroundColor: "red", borderRadius: 25}}
+      >
+      </Animatable.View>
       <StatusBar style="auto" hidden />
     </View>
   );
