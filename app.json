@@ -1,8 +1,5 @@
 {
   "expo": {
-    "experiments": {
-      "turboModules": true
-    },
     "name": "testOfstandalone",
     "slug": "testOfstandalone",
     "version": "1.0.0",
