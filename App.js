@@ -36,6 +36,8 @@ export default function App() {
         animation={animation}
         duration={2000}
         delay={1000}
+        iterationCount="infinite"
+        direction="alternate"
         style={{ width: 100, height: 100, backgroundColor: "red", borderRadius: 25}}
       >
       </Animatable.View>
