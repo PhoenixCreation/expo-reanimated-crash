@@ -1,46 +1,55 @@
 import { StatusBar } from 'expo-status-bar';
 import React from 'react';
-import { StyleSheet, Text, View, Animated, Button } from 'react-native';
-import * as Animatable from 'react-native-animatable';
+import { StyleSheet, Text, View, Button } from 'react-native';
+import Animated, {
+  useSharedValue,
+  withTiming,
+  useAnimatedStyle,
+  Easing,
+} from "react-native-reanimated";
 
-const animation = {
-  0: { opacity: 0, translateX: 50, translateY: -50},
-  1: { opacity: 1, translateX: 0, translateY: 0}
-}
 
 
 export default function App() {
-  const translateY = React.useRef(new Animated.Value(0)).current;
 
-  const goto = (end) => {
-    Animated.timing(translateY, {
-      toValue: end,
-      duration: 1500,
-      useNativeDriver: true
-    }).start();
-  }
+  const randomWidth = useSharedValue(10);
+
+  const config = {
+    duration: 500,
+    easing: Easing.bezier(0.5, 0.01, 0, 1),
+  };
+
+  const style = useAnimatedStyle(() => {
+    return {
+      width: withTiming(randomWidth.value, config),
+    };
+  });
+
   return (
     <View style={styles.container}>
-      <View style={{ position: "absolute", left: 0, top: 0,right: 0, bottom:0, justifyContent: "space-between", zIndex: 10}}>
+      {/* <View style={{ position: "absolute", left: 0, top: 0,right: 0, bottom:0, justifyContent: "space-between", zIndex: 10}}>
         <Button
           title="To bottom"
-          onPress={() => goto(400)}
+          onPress={() => {}}
         />
         <Button
           title="To top"
-          onPress={() => goto(0)}
+          onPress={() => {}}
         />
-      </View>
-      <Animated.Text style={{ margin: 50, transform: [{translateY}]}}>Testing the standalone build after installing reanimated 2.0-release candidate - 0</Animated.Text>
-      <Animatable.View
-        animation={animation}
-        duration={2000}
-        delay={1000}
-        iterationCount="infinite"
-        direction="alternate"
-        style={{ width: 100, height: 100, backgroundColor: "red", borderRadius: 25}}
-      >
-      </Animatable.View>
+      </View> */}
+      <Animated.View
+        style={[
+          { width: 100, height: 80, backgroundColor: "black", margin: 30 },
+          style,
+        ]}
+      />
+      <Button
+        title="toggle"
+        onPress={() => {
+          randomWidth.value = Math.random() * 350;
+        }}
+      />
+      <Text>"react-native-reanimated": "2.0.0-rc.0",</Text>
       <StatusBar style="auto" hidden />
     </View>
   );
